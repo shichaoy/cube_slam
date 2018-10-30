@@ -1,0 +1,13 @@
+<!-- -->
+<launch>
+
+   <node pkg="line_lbd" type="linelbd_detect_node" name="linelbd_detect_node"  output="screen" 
+		args="$(find line_lbd)/data/cabinet.png">
+   </node>
+
+   <param name="save_folder" value ="$(find line_lbd)/data/"/>
+   <param name="use_LSD_algorithm" value="true"/>  # true, false   LSD or Edline detector.
+   <param name="save_to_imgs" value="false"/>
+   <param name="save_to_txts" value="false"/>
+
+</launch>
