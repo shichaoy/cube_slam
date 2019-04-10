@@ -1,11 +1,11 @@
 # Cube SLAM #
 This code contains a basic implementation for Cube SLAM. Given RGB and 2D object detection, the algorithm detects 3D cuboids from each frame then formulate an object SLAM to optimize both camera pose and cuboid poses. ```object_slam``` is main package. ```detect_3d_cuboid``` is the C++ version of single image cuboid detection, corresponding to a [matlab version](https://github.com/shichaoy/matlab_cuboid_detect).
 
-**Authors:** [Shichao Yang](http://www.frc.ri.cmu.edu/~syang/)
+**Authors:** [Shichao Yang](https://shichaoy.github.io./)
 
 **Related Paper:**
 
-* **CubeSLAM: Monocular 3D Object Detection and SLAM without Prior Models**, Arxiv 2018, S. Yang, S. Scherer  [**PDF**](https://arxiv.org/abs/1806.00557)
+* **CubeSLAM: Monocular 3D Object SLAM**, IEEE Transactions on Robotics 2019, S. Yang, S. Scherer  [**PDF**](https://arxiv.org/abs/1806.00557)
 
 If you use the code in your research work, please cite the above paper. Feel free to contact the authors if you have any further questions.
 
