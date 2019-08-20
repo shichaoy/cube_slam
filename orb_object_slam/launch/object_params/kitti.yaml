@@ -1,0 +1,13 @@
+scene_name: kitti
+
+#base_data_folder: '/home/shichao/ysc_space/dataset/processed_third/slam/kitti/kitti_odom/seq_07'
+#base_data_folder: '/home/shichao/ysc_space/dataset/processed_third/kitti_tracking/training/0018'
+
+# initial pose
+init_x:       0
+init_y:       0
+init_z:       1.7
+init_qx:      -0.7071
+init_qy:      0
+init_qz:      0
+init_qw:      0.7071

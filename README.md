@@ -1,5 +1,9 @@
+
+
 # Cube SLAM #
-This code contains a basic implementation for Cube SLAM. Given RGB and 2D object detection, the algorithm detects 3D cuboids from each frame then formulate an object SLAM to optimize both camera pose and cuboid poses. ```object_slam``` is main package. ```detect_3d_cuboid``` is the C++ version of single image cuboid detection, corresponding to a [matlab version](https://github.com/shichaoy/matlab_cuboid_detect).
+This code contains two mode:
+1)  object SLAM integrated with ORB SLAM. See ```orb_object_slam```  Online SLAM with ros bag input. It reads the offline detected 3D object.
+2) Basic implementation for Cube only SLAM. See ```object_slam``` Given RGB and 2D object detection, the algorithm detects 3D cuboids from each frame then formulate an object SLAM to optimize both camera pose and cuboid poses.  is main package. ```detect_3d_cuboid``` is the C++ version of single image cuboid detection, corresponding to a [matlab version](https://github.com/shichaoy/matlab_cuboid_detect).
 
 **Authors:** [Shichao Yang](https://shichaoy.github.io./)
 
@@ -43,10 +47,17 @@ roslaunch object_slam object_slam_example.launch
 ```
 You will see results in Rviz. Default rviz file is for ros indigo. A kinetic version is also provided.
 
+To run orb-object SLAM in folder ```orb_object_slam```, download [data](https://drive.google.com/open?id=1FrBdmYxrrM6XeBe_vIXCuBTfZeCMgApL). See correct path in ```mono.launch```, then run following in two terminal:
+``` bash
+roslaunch orb_object_slam mono.launch
+rosbag play mono.bag --clock -r 0.5
+```
+If compiling problems met, please refer to ORB_SLAM.
+
 
 ### Notes
 
-1. This package utilizes cuboid object as the only SLAM landmark. The integration with ORB SLAM point features is not provided yet. Therefore, it may not produce accurate results for general scenarios.
+1. For the online orb object SLAM, we simply read the offline detected 3D object txt in each image. Many other deep learning based 3D detection can also be used similarly especially in KITTI data.
 
 2. In the launch file (```object_slam_example.launch```), if ```online_detect_mode=false```, it requires the matlab saved cuboid images, cuboid pose txts and camera pose txts.  if ```true```, it reads the 2D object bounding box txt then online detects 3D cuboids poses using C++.
 

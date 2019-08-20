@@ -1,0 +1,13 @@
+*~
+ignored/
+bagfiles/
+Outputs/AllFrameTrajectory.txt
+Outputs/AllFrameTrajectoryKITTI.txt
+Outputs/KeyFrameTrajectory.txt
+Vocabulary/ORBvoc.bin
+Thirdparty/DBoW2/build/
+Thirdparty/DBoW2/lib/
+Thirdparty/g2o/build/
+Thirdparty/g2o/build/CMakeFiles/
+Thirdparty/g2o/lib/
+lib/liborb_slam2.so

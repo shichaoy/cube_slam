@@ -1,0 +1,63 @@
+<!-- -->
+<launch>
+   # ROS_NAMESPACE=mono rosrun image_proc image_proc   bayer to bgr8
+   <node pkg="image_proc" type="image_proc" name="image_proc" ns="mono" args="bayer to bgr8" />
+   <node pkg="orb_object_slam" type="ros_mono" name="ros_mono"  output="screen"  args="$(find orb_object_slam)/Vocabulary/ORBvoc.bin 
+	    $(find orb_object_slam)/Examples/Monocular/KITTI04-12_me.yaml">  # KITTI_09_26 KITTI04-12_me kinect_mev2 TUM_mono  tamu_corridor
+ 	<remap from="/camera/image_raw" to ="/kitti/left/image_raw"/> 
+ 	# /kitti/left/image_raw   /camera/rgb/image_raw /camera/rgb/image_color  /mono/image_rect_color /kinect2/qhd/image_color_rect /camera/mono/image_raw
+   </node>
+   <param name="enable_loop_closing" value="false" />  # false true
+   <param name="enable_viewer" value="true" />   <param name="enable_viewmap" value="true" />   <param name="enable_viewimage" value="true" />
+   
+   <param name="parallel_mapping" value="true" />  # if false, may reduce bag rate
+   
+   <rosparam file="$(find orb_object_slam)/launch/object_params/kitti.yaml" command="load"/>   # initial pose, folder name
+   <param name="base_data_folder" value="/home/shichao/ysc_space/dataset/processed_third/slam/kitti/kitti_odom/seq_07" />
+
+   <param name="whether_detect_object" value="true" />
+   <param name="whether_read_offline_cuboidtxt" value="true" />  # for kitti, I read offline data.
+   <param name="associate_point_with_object" value="true" />
+   <param name="obj_det_2d_thre" value="0.5" />  # for online 3D detection
+
+
+   <param name="bundle_object_opti" value="true" />
+   <param name="build_worldframe_on_ground" value="true" />
+   <param name="camera_object_BA_weight" value="2.0" />  #2.0 default
+
+
+   # for dynamic object
+   <param name="whether_dynamic_object" value="false" />
+   <param name="remove_dynamic_features" value="false" />
+   <param name="use_dynamic_klt_features" value="false" />	# not orb features
+   <param name="object_velocity_BA_weight" value="0.5" />
+
+   <param name="use_truth_trackid" value="false" />   # use offline tracking id  if false, need to initialize feature point, tracking, obj depth init.
+   <param name="triangulate_dynamic_pts" value="false" />
+   <param name="ba_dyna_pt_obj_cam" value="true" />  # need depth init
+   <param name="ba_dyna_obj_velo" value="true" />
+   <param name="ba_dyna_obj_cam" value="true" />
+   
+   # for depth initialization
+   <param name="mono_firstframe_truth_depth_init" value="false" />
+   <param name="mono_firstframe_Obj_depth_init" value="false" />
+   <param name="mono_allframe_Obj_depth_init" value="false" />   # may not need for kitti
+   
+   # for ground height scaling
+   <param name="enable_ground_height_scale" value="true" />  # for kitti
+   <param name="ground_everyKFs" value="10" />
+   <param name="ground_roi_middle" value="3.0" />  # 3(1/3) or 4(1/2)
+   <param name="ground_roi_lower" value="3.0" />   # 2 or 3
+   <param name="ground_inlier_pts" value="20" />
+   <param name="ground_dist_ratio" value="0.08" />
+
+   # save result
+   <param name="whether_save_online_detected_cuboids" value="false" />  
+   <param name="whether_save_final_optimized_cuboids" value="false" />   
+      
+   # gui drawing parameters  usually set to true, for paper, set to false
+   <param name="draw_map_truth_paths" value="true" />
+   <param name="draw_nonlocal_mappoint" value="true" />
+   
+
+</launch>
