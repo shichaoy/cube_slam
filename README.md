@@ -52,6 +52,10 @@ To run orb-object SLAM in folder ```orb_object_slam```, download [data](https://
 roslaunch orb_object_slam mono.launch
 rosbag play mono.bag --clock -r 0.5
 ```
+
+To run dynamic orb-object SLAM mentioned in the paper, download [data](https://drive.google.com/drive/folders/1T2PmK3Xt5Bq9Z7UhV8FythvramqhOo0a?usp=sharing). Similar to above, set correct path in ```mono_dynamic.launch```, then run the launch file with bag file.
+
+
 If compiling problems met, please refer to ORB_SLAM.
 
 
