@@ -1614,8 +1614,10 @@ void Tracking::DetectCuboid(KeyFrame *pKF)
 
 		cv::Mat frame_pose_to_init = pKF->GetPoseInverse(); // camera to init world
 		cv::Mat frame_pose_to_ground = frame_pose_to_init;  // to my ground frame
-		if (!build_worldframe_on_ground)
+		if (!build_worldframe_on_ground){ // if initial world frame is not on ground, apply T_ground_init
 			frame_pose_to_ground = InitToGround * frame_pose_to_ground;
+		}
+		pop_pose_to_ground = frame_pose_to_init;
 
 		Eigen::Matrix4f cam_transToGround = Converter::toMatrix4f(pop_pose_to_ground);
 		detect_cuboid_obj->detect_cuboid(pKF->raw_img, cam_transToGround.cast<double>(), all_obj2d_bbox_infov_mat, all_lines_raw, all_obj_cubes);
